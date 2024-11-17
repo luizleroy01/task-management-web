@@ -1,12 +1,30 @@
 <app-header></app-header>
-<div class="container">
+<nav></nav>
+<section class="container">
   @for (item of tasks; track $index) {
-    <div class="card flex justify-content-center">
-      <p-card header={{item.name}}>
+    <div class="card flex justify-content-center task-list">
+      <p-card [style]="{padding:'10px'}"  header={{item.name}} >
+        <div class="data-tasks">
           <p class="m-0">
-              {{item.description}}
+            {{item.description}}
           </p>
+          <p>
+            {{item.status ? 'Concluída' : 'Não concluída'}}
+          </p>
+        </div>
+        <div class="card flex justify-content-center">
+          <p-toast />
+          <p-splitButton 
+              label="Save" 
+              (onClick)="save('info')" 
+              [model]="items" />
+        </div>
+          
       </p-card>
   </div>
+  <p-divider />
   }
-</div>
+</section>
+<footer>
+
+</footer>
