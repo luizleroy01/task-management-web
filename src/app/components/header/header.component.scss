@@ -1,0 +1,42 @@
+.principal{
+    background-color: blue;
+    color:white;
+    height:100px;
+}
+.container{
+    max-width:1200px;
+    margin:0 auto;
+    padding:20px;
+    display:flex;
+}
+.title{
+    width:80%;
+    height:100%;
+    margin-top:5px;
+}
+.link{
+    width:20%;
+    height:100%;
+    margin: 15px;
+    display:flex;
+    gap:10px;
+}
+.button_sign{
+    padding:10px;
+    width:80px;
+    height:40px;
+    border-radius: 8px;
+    background-color: white;
+    color:black;
+}
+
+.button_sign:hover{
+    background-color: rgb(224, 223, 223);
+    cursor: pointer;
+}
+.text_link{
+    text-decoration: none;
+}
+.link_sign{
+    color:white;
+}

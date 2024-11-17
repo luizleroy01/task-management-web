@@ -1,13 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from "./components/header/header.component";
+import { TaskService } from './services/task.service';
+import { Task } from './models/task.model';
+import { lastValueFrom } from 'rxjs';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, HeaderComponent,CardModule],
   templateUrl: './app.component.html',
+  template:`<router-outlet />`,
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'task-management-web';
+export class AppComponent implements OnInit {
+  tasks :Task[] = [];
+ constructor(private taskService:TaskService){}
+
+ ngOnInit(): void {
+     this.getTasks();
+ }
+  async getTasks(){
+    this.tasks = await lastValueFrom(this.taskService.getTasks());
+    console.log(this.tasks);
+  }
 }
