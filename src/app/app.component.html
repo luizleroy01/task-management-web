@@ -13,17 +13,19 @@
           </p>
         </div>
         <div class="card flex justify-content-center">
-          <p-toast />
-          <p-splitButton 
-              label="Save" 
-              (onClick)="save('info')" 
-              [model]="items" />
+          
         </div>
           
       </p-card>
+      
   </div>
   <p-divider />
   }
+  <p-splitButton 
+            label="Save" 
+            (onClick)="save('success')" 
+            [model]="items" 
+            severity="success" />
 </section>
 <footer>
 

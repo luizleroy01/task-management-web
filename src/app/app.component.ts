@@ -6,9 +6,10 @@ import { Task } from './models/task.model';
 import { lastValueFrom } from 'rxjs';
 import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
-import { MenuItem, MessageService } from 'primeng/api';
+import { MenuItem} from 'primeng/api';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { ToastModule } from 'primeng/toast';
+
 
 @Component({
   selector: 'app-root',
@@ -16,8 +17,7 @@ import { ToastModule } from 'primeng/toast';
   imports: [ HeaderComponent,CardModule,DividerModule,SplitButtonModule, ToastModule],
   templateUrl: './app.component.html',
   template:`<router-outlet />`,
-  styleUrl: './app.component.scss',
-  providers: [MessageService]
+  styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
 tasks :Task[] = [];
@@ -36,6 +36,9 @@ items: MenuItem[];
             this.delete();
         }
     },
+    { label: 'Angular Website', url: 'http://angular.io' },
+    { separator: true },
+    { label: 'Upload', routerLink: ['/fileupload'] }
   ];
  }
 
@@ -46,7 +49,7 @@ items: MenuItem[];
     this.tasks = await lastValueFrom(this.taskService.getTasks());
   }
 
-  save(action:string) : void {
+  save(action:string) {
     console.log(action);
   }
 
@@ -54,7 +57,7 @@ items: MenuItem[];
     console.log('update');
   }
 
-delete() {
+  delete() {
     console.log('delete');
-}
+  }
 }
