@@ -2,30 +2,8 @@
 <nav></nav>
 <section class="container">
   @for (item of tasks; track $index) {
-    <div class="card flex justify-content-center task-list">
-      <p-card [style]="{padding:'10px'}"  header={{item.name}} >
-        <div class="data-tasks">
-          <p class="m-0">
-            {{item.description}}
-          </p>
-          <p>
-            {{item.status ? 'Concluída' : 'Não concluída'}}
-          </p>
-        </div>
-        <div class="card flex justify-content-center">
-          
-        </div>
-          
-      </p-card>
-      
-  </div>
-  <p-divider />
+    
   }
-  <p-splitButton 
-            label="Save" 
-            (onClick)="save('success')" 
-            [model]="items" 
-            severity="success" />
 </section>
 <footer>
 

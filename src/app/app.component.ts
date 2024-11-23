@@ -4,43 +4,21 @@ import { HeaderComponent } from "./components/header/header.component";
 import { TaskService } from './services/task.service';
 import { Task } from './models/task.model';
 import { lastValueFrom } from 'rxjs';
-import { CardModule } from 'primeng/card';
-import { DividerModule } from 'primeng/divider';
-import { MenuItem} from 'primeng/api';
-import { SplitButtonModule } from 'primeng/splitbutton';
-import { ToastModule } from 'primeng/toast';
+
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ HeaderComponent,CardModule,DividerModule,SplitButtonModule, ToastModule],
+  imports: [HeaderComponent],
   templateUrl: './app.component.html',
   template:`<router-outlet />`,
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
 tasks :Task[] = [];
-items: MenuItem[];
- constructor(private taskService:TaskService){
-  this.items = [
-    {
-        label: 'Update',
-        command: () => {
-            this.update();
-        }
-    },
-    {
-        label: 'Delete',
-        command: () => {
-            this.delete();
-        }
-    },
-    { label: 'Angular Website', url: 'http://angular.io' },
-    { separator: true },
-    { label: 'Upload', routerLink: ['/fileupload'] }
-  ];
- }
+
+ constructor(private taskService:TaskService){}
 
  ngOnInit(): void {
      this.getTasks();
