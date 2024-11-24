@@ -1,1 +1,19 @@
-<p>form-task works!</p>
+<form (ngSubmit)="onSubmit($event)">
+    <div class="line">
+        <div class="form-group field">
+            <label for="firstName">Nome</label>
+            <input id="firstName" formControlName="firstName" type="text" placeholder="Nome">
+          </div>
+    </div>
+    <div class="form-group">
+        <mat-form-field class="example-chip-list"gsfg>
+          <mat-label>Fale um pouco sobre você</mat-label>
+          <textarea matInput></textarea>
+        </mat-form-field>
+      </div>
+      <mat-divider></mat-divider>
+      <div>
+        <button type="submit">Cadastrar</button>
+      </div>
+
+</form>

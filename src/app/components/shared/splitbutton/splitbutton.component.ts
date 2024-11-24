@@ -9,4 +9,8 @@ import { Component, Input } from '@angular/core';
 })
 export class SplitbuttonComponent {
   @Input() label: string = '';
+
+  metodo(){
+    console.log('funciona')
+  }
 }
