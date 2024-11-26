@@ -1,13 +1,18 @@
-<div>
-    <div>
-        <div>
+<div class="card">
+    <div class="header-content">
+        <div class="title">
             <h2>{{task}}</h2> 
         </div>
         <div>
             {{date}}
         </div>
     </div>
+    <hr class="solid">
     <div>
         <p>{{description}}</p>
     </div>
+    <div class="header-content">
+        <p>{{status ? 'Concluida' : 'Não Concluída'}}</p>
+    </div>
+   
 </div>

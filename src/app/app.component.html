@@ -2,7 +2,12 @@
 <nav></nav>
 <section class="container">
   @for (item of tasks; track $index) {
-    
+    <app-card
+    [task]="item.name"
+    [description]="item.description"
+    [date]="item.date"
+    [status]="true"
+    />
   }
 </section>
 <footer>

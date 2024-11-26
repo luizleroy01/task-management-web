@@ -4,13 +4,14 @@ import { HeaderComponent } from "./components/header/header.component";
 import { TaskService } from './services/task.service';
 import { Task } from './models/task.model';
 import { lastValueFrom } from 'rxjs';
+import { CardComponent } from './components/card/card.component';
 
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent],
+  imports: [HeaderComponent,CardComponent],
   templateUrl: './app.component.html',
   template:`<router-outlet />`,
   styleUrl: './app.component.scss'
