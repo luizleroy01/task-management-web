@@ -1,19 +1,27 @@
-<form (ngSubmit)="onSubmit($event)">
-    <div class="line">
-        <div class="form-group field">
-            <label for="firstName">Nome</label>
-            <input id="firstName" formControlName="firstName" type="text" placeholder="Nome">
-          </div>
-    </div>
-    <div class="form-group">
-        <mat-form-field class="example-chip-list"gsfg>
-          <mat-label>Fale um pouco sobre você</mat-label>
-          <textarea matInput></textarea>
-        </mat-form-field>
-      </div>
-      <mat-divider></mat-divider>
+<div class="modal-form">
+  <h2 mat-dialog-title>Adicionar Tarefa</h2>
+  <mat-divider></mat-divider>
+  <div mat-dialog-content class="form-task">
+    <form>
       <div>
-        <button type="submit">Cadastrar</button>
+        <label>
+          Nome:
+          <input type="text" placeholder="Título da Tarefa" >
+        </label>
+        <label for="date">
+          Data:
+          <input type="date" id="date" placeholder="Data de elaboração" >
+        </label>
       </div>
+      <label>
+        
+      </label>
+    </form>
+  </div>
+  <mat-divider></mat-divider>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Fechar</button>
+    <button mat-button (click)="confirm()">Confirmar</button>
+  </div>
+</div>
 
-</form>

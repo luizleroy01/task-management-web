@@ -13,4 +13,5 @@ export class CardComponent {
   @Input() description:string ='';
   @Input() date:string ='';
   @Input() status:boolean = false;
+  @Input() attachments: number = 0;
 }

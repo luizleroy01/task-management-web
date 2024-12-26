@@ -1,15 +1,17 @@
 <app-header></app-header>
-<nav></nav>
-<section class="container">
+
+<div class="container">
+  <button mat-button class="bt-new-task" (click)="openDialog()">Nova tarefa</button>
   @for (item of tasks; track $index) {
-    <app-card
-    [task]="item.name"
-    [description]="item.description"
-    [date]="item.date"
-    [status]="true"
-    />
+      <app-card
+      [task]="item.name"
+      [description]="item.description"
+      [date]="item.date"
+      [status]="item.status"
+      [attachments]="item.anexos.length"
+      />
   }
-</section>
+</div>
 <footer>
 
 </footer>

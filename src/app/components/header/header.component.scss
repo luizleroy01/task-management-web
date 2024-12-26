@@ -2,6 +2,8 @@
     background-color: blue;
     color:white;
     height:100px;
+    z-index:99;
+    position: relative;
 }
 .container{
     max-width:1200px;

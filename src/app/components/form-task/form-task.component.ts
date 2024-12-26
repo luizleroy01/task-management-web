@@ -21,13 +21,8 @@ export class FormTaskComponent {
     anexos: new UntypedFormControl([])
   });
 
-  onSubmit(event: Event): void {
-    event.preventDefault();
-    if (this.userForm.valid) {
-      this.dialogRef.close(this.userForm.value); // Passa os dados ao componente pai
-    } else {
-      console.log('Formulário inválido');
-    }
+  confirm(){
+    console.log("confirmar ação")
   }
 
 }

@@ -11,13 +11,12 @@
     <div>
         <p>{{description}}</p>
     </div>
-    <div class="header-content">
+    <div class="card-information">
         <div>
             <p>{{status ? 'Concluida' : 'Não Concluída'}}</p>
         </div>
-        <div>
-            <button><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon></button>
-            <button>Excluir</button>
+        <div class="attachments-count">
+            Anexos: {{attachments}}
         </div>
     </div>
    

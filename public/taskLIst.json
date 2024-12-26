@@ -1,0 +1,26 @@
+[
+        {
+            "id": "idTask1",
+            "name": "Tarefa 1",
+            "description":"Tarefa 1 com um detalhamento a ser desenvolvido",
+            "date":"22/12/2024",
+            "status":true,
+            "anexos":["1","2","3","4","5","6","7","8"]
+        },
+        {
+            "id": "idTask1",
+            "name": "Tarefa 2",
+            "description":"Tarefa 2 com um detalhamento a ser desenvolvido",
+            "date":"23/12/2024",
+            "status":false,
+            "anexos":["1","2","3","4","5","6","7","8"]
+        },
+        {
+            "id": "idTask1",
+            "name": "Tarefa 3",
+            "description":"Tarefa 3 com um detalhamento a ser desenvolvido",
+            "date":"24/12/2024",
+            "status":true,
+            "anexos":["1","2","3","4","5","6","7","8"]
+        }
+    ]

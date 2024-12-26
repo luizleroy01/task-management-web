@@ -3,7 +3,11 @@
     margin:0 auto;
     padding:20px;
 }
-
+.task-item-list{
+    display:flex;
+    width:100%;
+    gap:10px;
+}
 .task-list{
     margin:10px auto;
     width:100%;
@@ -18,4 +22,24 @@
 }
 .action-tasks{
     width:20%;
+}
+
+.bt-new-task{
+    border-radius: 8px;
+    padding: 10px;
+    background-color: rgb(67, 67, 255);
+    color:white;
+    font-size:16px;
+    font-weight: bold;
+    border:none;
+    letter-spacing: 2px;
+}
+
+.bt-new-task:hover{
+    background-color: rgb(44, 44, 223);
+    cursor: pointer;
+}
+
+.painel{
+    height:100%;
 }
