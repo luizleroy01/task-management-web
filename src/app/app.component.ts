@@ -56,14 +56,57 @@ tasks :Task[] = [];
     const dialogRef = this.dialog.open(FormTaskComponent,{
       height: '90%',
       width: '40%',
-      position: { top: '100px', right: '0' }
-      
+      position: { top: '100px', right: '0' },
+      disableClose: true,
+      data:{
+        name :'',
+        description : '',
+        date : '',
+        status : false,
+        anexos : []
+      }  
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(data => {
       console.log('The dialog was closed');
-      if (result !== undefined) {
+      console.log(data);
+      if (data !== undefined) {
+        this.createTask(data);
+        this.getTasks();
       }
     });
   }
+
+  async createTask(body : Task){
+    const response = await lastValueFrom(this.taskService.createTask(body));
+  }
+
+  //next steps: configure to support reloading data after changes
+  /*
+  addItem() {
+    this.loading = true;
+    this.dataService.insertData({ name: this.newItem }).subscribe({
+      next: () => {
+        this.fetchItems(); // Fetch updated data
+      },
+      error: (err) => {
+        console.error('Error adding item:', err);
+        this.loading = false; // Stop loading on error
+      },
+    });
+  }
+
+  fetchItems() {
+    this.dataService.fetchData().subscribe({
+      next: (data) => {
+        this.items = data;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error fetching items:', err);
+        this.loading = false; // Stop loading on error
+      },
+    });
+  }
+  */
 }

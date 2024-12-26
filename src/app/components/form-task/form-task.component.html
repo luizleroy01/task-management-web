@@ -2,26 +2,47 @@
   <h2 mat-dialog-title>Adicionar Tarefa</h2>
   <mat-divider></mat-divider>
   <div mat-dialog-content class="form-task">
-    <form>
-      <div>
-        <label>
-          Nome:
-          <input type="text" placeholder="Título da Tarefa" >
-        </label>
-        <label for="date">
-          Data:
-          <input type="date" id="date" placeholder="Data de elaboração" >
-        </label>
+    <form [formGroup]="taskForm" (ngSubmit)="confirm()">
+      <div class="form-fields line">
+        <div class="form-title">
+          <label>
+            <span class="form-label">Nome</span>
+            <input type="text" 
+            placeholder="Título da Tarefa" 
+            class="input simple-text"
+            formControlName="name"
+            >
+          </label>
+        </div>
+        <div>
+          <label for="date">
+            <span class="form-label">Data de Conclusão</span>
+            <input type="date" id="date"
+             placeholder="Data de conclusão"
+            class="input simple-text"
+            formControlName="date"
+            >
+          </label>
+        </div>
       </div>
-      <label>
-        
-      </label>
+      <div class="form-fields">
+          <textarea placeholder="Descrição da Tarefa"
+           class="input area-text"
+            formControlName="description"
+           ></textarea>
+      </div>
+      <div class="form-fields">
+        <!--TODO: Create a grid component to visulize all data files-->
+      </div>
+      <div class="form-fields">
+        <!--TODO: Create a component to input multiple files-->
+      </div>
     </form>
   </div>
   <mat-divider></mat-divider>
-  <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Fechar</button>
-    <button mat-button (click)="confirm()">Confirmar</button>
+  <div mat-dialog-actions class="form-actions">
+    <button mat-button mat-dialog-close class="button-action" (click)="close()">Fechar</button>
+    <button mat-button (click)="confirm()" class="button-action">Adicionar</button>
   </div>
 </div>
 

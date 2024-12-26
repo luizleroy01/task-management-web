@@ -20,4 +20,8 @@ export class TaskService {
   getTasksTest(){
     return taskList;
   }
+
+  createTask(task: Task): Observable<Task>{
+    return this.http.post<Task>(`${BASE_URL}`, task);
+  }
 }
