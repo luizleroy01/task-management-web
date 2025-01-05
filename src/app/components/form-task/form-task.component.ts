@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDividerModule} from '@angular/material/divider';
@@ -17,7 +17,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './form-task.component.html',
   styleUrl: './form-task.component.scss'
 })
-export class FormTaskComponent {
+export class FormTaskComponent implements OnInit{
+  isEditMode = false;
+  enableEdit = false;
+  formattedDate = '';
   taskForm = new UntypedFormGroup({
     name: new UntypedFormControl('',Validators.required),
     description: new UntypedFormControl('', Validators.required),
@@ -28,8 +31,17 @@ export class FormTaskComponent {
 
   constructor(private taskService: TaskService,
     private dialogRef: MatDialogRef<FormTaskComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Task
+    @Inject(MAT_DIALOG_DATA) public data: any
   ){}
+  ngOnInit(): void {
+    if(this.data){
+      this.fillTaskFormData(this.data);
+    }
+    this.isEditMode = this.data.editMode;
+    if(this.isEditMode){
+      this.taskForm.disable();
+    }
+  }
 
   confirm(){
     console.log("confirmar ação")
@@ -51,6 +63,27 @@ export class FormTaskComponent {
 
   close(){
     this.dialogRef.close(true);
+  }
+
+  fillTaskFormData(task:Task){
+    this.formattedDate = this.formatDate(task.date);
+    this.taskForm.patchValue({
+      name: task.name,
+      description: task.description,
+      date: this.formattedDate,
+      status: task.status,
+      anexos: task.anexos
+    });
+  }
+
+  formatDate(date: string):string{
+    const dateParts = date.split("/");
+    return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+  }
+
+  enableEditMode(){
+    this.enableEdit = true;
+    this.taskForm.enable();
   }
 
 }

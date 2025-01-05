@@ -45,8 +45,9 @@
     display:flex;
     gap:10px;
     justify-content: flex-end;
-    bottom:0;
-    position: relative;
+    bottom:50px;
+    right:25px;
+    position:absolute;
     margin-top: 15px;
 }
 
@@ -54,4 +55,30 @@
     padding:10px 20px;
     border-radius: 8px;
     cursor:pointer;
+    border:none;
+}
+
+.b-danger{
+    background-color: red;
+    color: white;
+}
+
+.b-success{
+    background-color: green;
+    color: white;
+}
+
+.b-warning{
+    background-color: orange;
+    color: white;
+}
+
+.b-info{
+    background-color: blue;
+    color: white;
+}
+
+.b-secondary{
+    background-color: gray;
+    color: white;
 }

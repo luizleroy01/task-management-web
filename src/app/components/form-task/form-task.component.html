@@ -1,5 +1,5 @@
 <div class="modal-form">
-  <h2 mat-dialog-title>Adicionar Tarefa</h2>
+  <h2 mat-dialog-title>{{this.isEditMode ? 'Visualizar Tarefa' : 'Adicionar Tarefa' }}</h2>
   <mat-divider></mat-divider>
   <div mat-dialog-content class="form-task">
     <form [formGroup]="taskForm" (ngSubmit)="confirm()">
@@ -11,16 +11,19 @@
             placeholder="Título da Tarefa" 
             class="input simple-text"
             formControlName="name"
+            [disabled]="this.enableEdit"
             >
           </label>
         </div>
         <div>
-          <label for="date">
+          <label for="date-task">
             <span class="form-label">Data de Conclusão</span>
-            <input type="date" id="date"
+            <input type="date" id="date-task"
              placeholder="Data de conclusão"
             class="input simple-text"
+            [value] = "this.formattedDate"
             formControlName="date"
+            [disabled]="this.enableEdit"
             >
           </label>
         </div>
@@ -29,6 +32,7 @@
           <textarea placeholder="Descrição da Tarefa"
            class="input area-text"
             formControlName="description"
+            [disabled]="this.enableEdit"
            ></textarea>
       </div>
       <div class="form-fields">
@@ -41,8 +45,11 @@
   </div>
   <mat-divider></mat-divider>
   <div mat-dialog-actions class="form-actions">
-    <button mat-button mat-dialog-close class="button-action" (click)="close()">Fechar</button>
-    <button mat-button (click)="confirm()" class="button-action">Adicionar</button>
+    <button mat-button (click)="confirm()" class="button-action b-danger" *ngIf="this.isEditMode">Excluir</button>
+    <button mat-button mat-dialog-close class="button-action b-secondary" (click)="close()">Fechar</button>
+    <button mat-button (click)="confirm()" class="button-action b-info" *ngIf="!this.isEditMode">Adicionar</button>
+    <button mat-button (click)="enableEditMode()" class="button-action b-info" *ngIf="this.isEditMode && !this.enableEdit">Editar</button>
+    <button mat-button (click)="confirm()" class="button-action b-info" *ngIf="this.isEditMode && this.enableEdit">Salvar</button>
   </div>
 </div>
 

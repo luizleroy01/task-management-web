@@ -52,7 +52,7 @@ tasks :Task[] = [];
     console.log('delete');
   }
 
-  openDialog(): void {
+  openDialogCreateTask(): void {
     const dialogRef = this.dialog.open(FormTaskComponent,{
       height: '90%',
       width: '40%',
@@ -63,7 +63,34 @@ tasks :Task[] = [];
         description : '',
         date : '',
         status : false,
-        anexos : []
+        anexos : [],
+        editMode:false,
+      } 
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      console.log('The dialog was closed');
+      console.log(data);
+      if (data !== undefined) {
+        this.createTask(data);
+        this.getTasks();
+      }
+    });
+  }
+
+  openDialogEditTask(data: Task): void {
+    const dialogRef = this.dialog.open(FormTaskComponent,{
+      height: '90%',
+      width: '45%',
+      position: { top: '100px', right: '0' },
+      disableClose: true,
+      data:{
+        name : data.name,
+        description : data.description,
+        date : data.date,
+        status : data.status,
+        anexos : [],
+        editMode:true
       }  
     });
 

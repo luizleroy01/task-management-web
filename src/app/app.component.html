@@ -1,8 +1,9 @@
 <app-header></app-header>
 
 <div class="container">
-  <button mat-button class="bt-new-task" (click)="openDialog()">Nova tarefa</button>
+  <button mat-button class="bt-new-task" (click)="openDialogCreateTask()">Nova tarefa</button>
   @for (item of tasks; track $index) {
+    <a (click)="openDialogEditTask(item)">
       <app-card
       [task]="item.name"
       [description]="item.description"
@@ -10,6 +11,7 @@
       [status]="item.status"
       [attachments]="item.anexos.length"
       />
+    </a>
   }
 </div>
 <footer>
