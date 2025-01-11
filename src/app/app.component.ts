@@ -13,30 +13,44 @@ import {
   MatDialogClose,
 } from '@angular/material/dialog';
 import { FormTaskComponent } from './components/form-task/form-task.component';
+import { LoadingComponent } from './components/shared/loading/loading.component';
+import { LoadingService } from './services/loading.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent,CardComponent,TaskActionsComponent],
+  imports: [HeaderComponent,CardComponent,LoadingComponent],
   templateUrl: './app.component.html',
-  template:`<router-outlet />`,
+  template:`
+  <router-outlet />
+  `,
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
 tasks :Task[] = [];
+private loading = false;
 
- constructor(private taskService:TaskService, private dialog: MatDialog){}
+ constructor(private taskService:TaskService, private dialog: MatDialog, private loadingService: LoadingService){}
 
  ngOnInit(): void {
      this.getTasks();
  }
   async getTasks(){
-    try{
-      this.tasks = await lastValueFrom(this.taskService.getTasks());
-    }
-    catch(error){
-      this.tasks = this.taskService.getTasksTest();
-    }
+    this.loadingService.show();
+   this.taskService.getTasks().subscribe({
+      next: (tasks) => {
+        this.tasks = tasks;
+        this.loading = false;
+        setTimeout(()=>{
+           this.loadingService.hide();
+        },1000)
+       
+      },
+      error: (error) => {
+        console.error('Error:', error);
+        this.tasks = this.taskService.getTasksTest();
+      }
+    })
     
   }
 
@@ -73,7 +87,6 @@ tasks :Task[] = [];
       console.log(data);
       if (data !== undefined) {
         this.createTask(data);
-        this.getTasks();
       }
     });
   }
@@ -99,13 +112,21 @@ tasks :Task[] = [];
       console.log(data);
       if (data !== undefined) {
         this.createTask(data);
-        this.getTasks();
       }
     });
   }
 
   async createTask(body : Task){
-    const response = await lastValueFrom(this.taskService.createTask(body));
+    this.taskService.createTask(body).subscribe({
+      next: (data) => {
+        console.log('Task created successfully', data);
+        this.loading = true;
+        this.getTasks();
+      },
+      error: (error) => {
+        console.error('Error creating task:', error);
+      },
+    })
   }
 
   //next steps: configure to support reloading data after changes
