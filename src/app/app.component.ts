@@ -15,11 +15,13 @@ import {
 import { FormTaskComponent } from './components/form-task/form-task.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
 import { LoadingService } from './services/loading.service';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent,CardComponent,LoadingComponent],
+  imports: [HeaderComponent,CardComponent,LoadingComponent,PaginatorComponent,MatDividerModule],
   templateUrl: './app.component.html',
   template:`
   <router-outlet />
@@ -43,12 +45,15 @@ private loading = false;
         this.loading = false;
         setTimeout(()=>{
            this.loadingService.hide();
-        },1000)
+        },1000);
        
       },
       error: (error) => {
         console.error('Error:', error);
         this.tasks = this.taskService.getTasksTest();
+        setTimeout(()=>{
+          this.loadingService.hide();
+       },1000)
       }
     })
     
