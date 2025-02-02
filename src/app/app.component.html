@@ -15,6 +15,11 @@
   }
   <mat-divider></mat-divider>
   <footer>
-    <app-paginator></app-paginator>
+    <app-paginator 
+    (currentTaskPage)="handleCurrentTaskPage($event)"
+    [totalTasks]="totalElements"
+    [totalPages]="totalPages"
+    >
+    </app-paginator>
   </footer>
 </div>

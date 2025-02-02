@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./components/header/header.component";
-import { TaskService } from './services/task.service';
+import { RequestTaskParams, TaskService } from './services/task.service';
 import { Task } from './models/task.model';
 import { lastValueFrom } from 'rxjs';
 import { CardComponent } from './components/card/card.component';
@@ -30,6 +30,9 @@ import { MatDividerModule } from '@angular/material/divider';
 })
 export class AppComponent implements OnInit {
 tasks :Task[] = [];
+private currentPage :number = 0;
+protected totalPages :number = 0;
+protected totalElements :number = 0;
 private loading = false;
 
  constructor(private taskService:TaskService, private dialog: MatDialog, private loadingService: LoadingService){}
@@ -39,9 +42,16 @@ private loading = false;
  }
   async getTasks(){
     this.loadingService.show();
-   this.taskService.getTasks().subscribe({
-      next: (tasks) => {
-        this.tasks = tasks;
+    const params : RequestTaskParams = {
+      page: this.currentPage,
+      items: 3
+    }
+   this.taskService.getPageTasks(params).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.tasks = response.tasks;
+        this.totalElements = response.totalElements;
+        this.totalPages = response.totalPages
         this.loading = false;
         setTimeout(()=>{
            this.loadingService.hide();
@@ -134,32 +144,8 @@ private loading = false;
     })
   }
 
-  //next steps: configure to support reloading data after changes
-  /*
-  addItem() {
-    this.loading = true;
-    this.dataService.insertData({ name: this.newItem }).subscribe({
-      next: () => {
-        this.fetchItems(); // Fetch updated data
-      },
-      error: (err) => {
-        console.error('Error adding item:', err);
-        this.loading = false; // Stop loading on error
-      },
-    });
+  protected handleCurrentTaskPage(page : number){
+    this.currentPage = page;
+    this.getTasks();
   }
-
-  fetchItems() {
-    this.dataService.fetchData().subscribe({
-      next: (data) => {
-        this.items = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Error fetching items:', err);
-        this.loading = false; // Stop loading on error
-      },
-    });
-  }
-  */
 }

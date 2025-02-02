@@ -1,9 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Task } from '../models/task.model';
+import { PageTasks, Task } from '../models/task.model';
 import { Observable } from 'rxjs';
 
 import taskList from '../../../public/taskLIst.json';
+export type RequestTaskParams = {
+  page: number;
+  items: number;
+}
 
 const BASE_URL = 'http://localhost:8080/tasks/'
 @Injectable({
@@ -15,6 +19,10 @@ export class TaskService {
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(`${BASE_URL}`);
+  }
+
+  getPageTasks(params : RequestTaskParams): Observable<PageTasks> {
+    return this.http.get<PageTasks>(`${BASE_URL}page`,{params: params});
   }
   
   getTasksTest(){
