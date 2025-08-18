@@ -17,11 +17,14 @@ import { LoadingComponent } from './components/shared/loading/loading.component'
 import { LoadingService } from './services/loading.service';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { MatDividerModule } from '@angular/material/divider';
+import AppTesteCardSpaceComponent from './components/teste-card-space/teste-card-space.component';
+import { CityMultiSelectComponent } from './components/city-multi-select-component/city-multi-select.component';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent,CardComponent,LoadingComponent,PaginatorComponent,MatDividerModule],
+  imports: [HeaderComponent,CardComponent,LoadingComponent,PaginatorComponent,MatDividerModule,CityMultiSelectComponent],
   templateUrl: './app.component.html',
   template:`
   <router-outlet />
@@ -34,6 +37,7 @@ private currentPage :number = 0;
 protected totalPages :number = 0;
 protected totalElements :number = 0;
 private loading = false;
+protected isEditMode = false;
 
  constructor(private taskService:TaskService, private dialog: MatDialog, private loadingService: LoadingService){}
 
@@ -147,5 +151,9 @@ private loading = false;
   protected handleCurrentTaskPage(page : number){
     this.currentPage = page;
     this.getTasks();
+  }
+
+  protected applyEditMode(){
+    this.isEditMode = !this.isEditMode;
   }
 }

@@ -1,0 +1,29 @@
+<!-- city-multi-select.component.html -->
+ 
+<div class="city-multi-select" [class.disabled]="disabled">
+  <!-- chips -->
+  <app-city-chips
+    class="overlay-chips"
+    [cities]="control.value || []"
+    [disabled]="disabled">
+  </app-city-chips>
+
+  <!-- mat-select -->
+  <mat-select
+    [formControl]="control"
+    multiple
+    [disabled]="disabled"
+    panelClass="city-overlay"
+    placeholder="Selecione cidades">
+    <mat-select-trigger>
+    <!-- deixamos vazio para não exibir os nomes separados por vírgula -->
+    <span></span>
+    </mat-select-trigger>
+    
+    @for(city of cities; track city){
+      <mat-option [value]="city">
+        {{ city }}
+      </mat-option>
+    }
+  </mat-select>
+</div>

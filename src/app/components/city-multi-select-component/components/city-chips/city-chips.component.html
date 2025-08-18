@@ -1,0 +1,16 @@
+<!-- city-chips.component.html -->
+<div class="city-chips">
+  <mat-chip-listbox>
+    @for(city of visibleCities; track city){
+        <mat-chip [disabled]="disabled">
+            {{ city }}
+        </mat-chip>
+    }
+    @if(remainingCount > 0){
+        <mat-chip [disabled]="true">
+            +{{ remainingCount }}
+        </mat-chip>
+    }
+    
+  </mat-chip-listbox>
+</div>

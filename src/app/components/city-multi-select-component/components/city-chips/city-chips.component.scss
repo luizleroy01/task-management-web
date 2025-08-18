@@ -1,0 +1,14 @@
+/* city-chips.component.scss */
+.city-chips {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  width: 100%;
+  height: 62px;
+
+  mat-chip-listbox {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+}
