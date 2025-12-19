@@ -1,31 +1,7 @@
 <app-header></app-header>
 <app-loading></app-loading>
-<button mat-button class="bt-new-task" (click)="applyEditMode()">Editar</button>
-<app-city-multi-select
-  [cities]="['São Paulo', 'Rio de Janeiro', 'Curitiba', 'Porto Alegre', 'Salvador']"
-  [disabled]="isEditMode">
-</app-city-multi-select>
 
-<div class="container">
-  <button mat-button class="bt-new-task" (click)="openDialogCreateTask()">Nova tarefa</button>
-  @for (item of tasks; track $index) {
-    <a (click)="openDialogEditTask(item)">
-      <app-card
-      [task]="item.name"
-      [description]="item.description"
-      [date]="item.date"
-      [status]="item.status"
-      [attachments]="item.anexos.length"
-      />
-    </a>
-  }
-  <mat-divider></mat-divider>
-  <footer>
-    <app-paginator 
-    (currentTaskPage)="handleCurrentTaskPage($event)"
-    [totalTasks]="totalElements"
-    [totalPages]="totalPages"
-    >
-    </app-paginator>
-  </footer>
-</div>
+
+<router-outlet />
+
+

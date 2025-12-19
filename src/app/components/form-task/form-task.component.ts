@@ -8,12 +8,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task.model';
 import { lastValueFrom } from 'rxjs/internal/lastValueFrom';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import SubjectTaskInputComponent from "../subject-task-input/subject-task-input.component";
+import { ConfirmFormComponent } from '../shared/confirm-form/confirm-form.component';
 
 @Component({
   selector: 'app-form-task',
   standalone: true,
-  imports: [CommonModule,MatFormFieldModule,MatDividerModule,MatFormFieldModule,MatInputModule,ReactiveFormsModule],
+  imports: [CommonModule, MatFormFieldModule, MatDividerModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, SubjectTaskInputComponent],
   templateUrl: './form-task.component.html',
   styleUrl: './form-task.component.scss'
 })
@@ -21,6 +23,7 @@ export class FormTaskComponent implements OnInit{
   isEditMode = false;
   enableEdit = false;
   formattedDate = '';
+  protected test = "A seleção da tarefa <strong>fazer trabalho de compiladores</strong> está praticamente concluída <br><br> Deseja continuar?"
   taskForm = new UntypedFormGroup({
     name: new UntypedFormControl('',Validators.required),
     description: new UntypedFormControl('', Validators.required),
@@ -31,6 +34,7 @@ export class FormTaskComponent implements OnInit{
 
   constructor(private taskService: TaskService,
     private dialogRef: MatDialogRef<FormTaskComponent>,
+    private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any
   ){}
   ngOnInit(): void {
@@ -59,6 +63,15 @@ export class FormTaskComponent implements OnInit{
        this.dialogRef.close(this.data);
     }
     
+  }
+
+  protected deleteTask(){
+    const deleteDialog = this.dialog.open(ConfirmFormComponent,{ height: '90%',
+      width: '40%',
+      position: { top: '100px', right: '0' },
+      disableClose: true,
+    }
+    );
   }
 
   close(){

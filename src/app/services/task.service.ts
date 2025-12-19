@@ -21,6 +21,10 @@ export class TaskService {
     return this.http.get<Task[]>(`${BASE_URL}`);
   }
 
+  deleteTask(idTask: string): Observable<any>{
+    return this.http.delete<any>(`${BASE_URL}/${idTask}`);
+  }
+
   getPageTasks(params : RequestTaskParams): Observable<PageTasks> {
     return this.http.get<PageTasks>(`${BASE_URL}page`,{params: params});
   }
